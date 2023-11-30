@@ -5,6 +5,24 @@ import * as yup from 'yup';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 function Regsiter() {
+    const formik = useFormik({
+        initialValues:{
+            userName:'',
+            email:'',
+            password:'',
+            image:'',
+        },
+        onSubmit:values=>{
+            console.log(values);
+        },
+        validate:values=>{
+           const reSchema = yup.object({
+            userName:yup.string().required("user name is requied").min(3,"must be at least 3 char").max(30,"must be at least 30 char"),
+           email:yup.string().required("user name is requied").email(),
+           password:yup.string().required("password is requied").min(3,"must be at least 3 char").max(30,"must be at least 30 char"),
+        })
+        }
+    });
     const handelFieldChange = (event)=>{
         formik.setFieldValue('image',event.target.files[0]);
     }
@@ -15,6 +33,7 @@ function Regsiter() {
         formData.append("password",users.password);
         formData.append("image",users.image);
         const {data} = await axios.post('https://ecommerce-node4.vercel.app/auth/signup',formData);
+        console.log(data);
    if(data.message=='success'){
     formik.resetForm();
     toast.success('plz verify your email',{
@@ -30,23 +49,7 @@ function Regsiter() {
    }
    console.log(data);
     }
-    const formik = useFormik({
-        initialValues:{
-            userName:'',
-            email:'',
-            password:'',
-        },
-        onSubmit:values=>{
-            console.log(values);
-        },
-        validate:values=>{
-           const reSchema = yup.object({
-            userName:yup.string().required("user name is requied").min(3,"must be at least 3 char").max(30,"must be at least 30 char"),
-           email:yup.string().required("user name is requied").email(),
-           password:yup.string().required("password is requied").min(3,"must be at least 3 char").max(30,"must be at least 30 char"),
-        })
-        }
-    });
+   
     const inputs = [
         {
             id:'username',
