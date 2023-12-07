@@ -11,6 +11,7 @@ import Login from './component/web/login/Login.jsx';
 import CategoriesDetails from './component/product/Proudct.jsx';
 import { jwtDecode } from 'jwt-decode';
 import { useEffect } from 'react';
+import { CartContextProvider } from './component/web/content/cart.jsx';
 
 function App() {
   const [user,setUser] = useState(null); //if null is user nonenter
@@ -83,7 +84,10 @@ const router = createBrowserRouter([ //object each element in object
   }
 ]);
   return (
-   <RouterProvider router={router} />
+    <CartContextProvider> 
+      <RouterProvider router={router} />
+    </CartContextProvider>
+  
    
   )
 }

@@ -21,6 +21,10 @@ function Navbar({user}) {
             <a className="nav-link" href="#">Categories</a>
           </li>
 
+          <li className="nav-item">
+            <a className="nav-link" href="#">cart</a>
+          </li>
+
 
           <li className="nav-item">
           <a className="nav-link" href="#">Products</a>

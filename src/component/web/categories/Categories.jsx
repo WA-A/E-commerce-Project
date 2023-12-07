@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../content/cart';
 
 
 function Categories() {
@@ -14,6 +15,9 @@ function Categories() {
    return data;
  
   }
+  const x = useContext(CartContext);
+  console.log(x);
+  
   const {data,isLoading} = useQuery('web_categories',getCategories);
   
 if(isLoading){
