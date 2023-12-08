@@ -1,7 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-function Navbar({user}) {
-  console.log(user);
+import React, { useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../content/User.jsx';
+function Navbar() {
+  let {userToken,setUserToken}=useContext(UserContext);
+  const navigate = useNavigate();
+  const logout = ()=>{
+    localStorage.removeItem("userToken");
+    setUserToken(null);
+    navigate("/");
+  }
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container">
@@ -39,11 +46,20 @@ function Navbar({user}) {
           Dropdown
         </a>
         <ul className="dropdown-menu ">
-          {!user}<>
+          {userToken == null?(
+            <>
           <li><Link className="dropdown-item" to="/register">register</Link></li>
           <li><hr className="dropdown-divider" /></li>
           <li><Link className="dropdown-item" to="/login">Login</Link></li>
           </>
+
+          ):(
+            <>
+            <li><Link className="dropdown-item" to="/register">profile</Link></li>
+            <li><hr className="dropdown-divider" /></li>
+            <li><Link className="dropdown-item" onClick={logout}>logout</Link></li>
+            </> 
+          )}
          
         </ul>
       </li>

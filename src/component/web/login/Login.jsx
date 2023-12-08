@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../content/User.jsx';
 
 function Login(saveCurrentUser) {
    const navigate = useNavigate();
@@ -50,12 +51,12 @@ function Login(saveCurrentUser) {
         formData.append("email",users.email);
         formData.append("password",users.password);
       //  formData.append("image",users.image);
-        const {data} = await axios.post('https://ecommerce-node4.vercel.app/auth/signin',formData);
-        console.log(data);
+        const {data} = await axios.post('https://ecommerce-node4.vercel.app/auth/signin',users);
+        //console.log(data);
    if(data.message=='success'){
     localStorage.setItem("userToken",data.token); // token in network
-    saveCurrentUser();
-    toast.success('Success',{
+    setuserToken(data.token);       //saveCurrentUser();
+    toast.success(' login Success',{
         position: "bottom-center",
          autoClose: false,
         hideProgressBar: false,

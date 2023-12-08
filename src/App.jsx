@@ -12,6 +12,7 @@ import CategoriesDetails from './component/product/Proudct.jsx';
 import { jwtDecode } from 'jwt-decode';
 import { useEffect } from 'react';
 import { CartContextProvider } from './component/web/content/cart.jsx';
+import UserContextProvider from './component/web/content/User.jsx';
 
 function App() {
   const [user,setUser] = useState(null); //if null is user nonenter
@@ -84,9 +85,12 @@ const router = createBrowserRouter([ //object each element in object
   }
 ]);
   return (
-    <CartContextProvider> 
+    <UserContextProvider>
+      <CartContextProvider> 
       <RouterProvider router={router} />
     </CartContextProvider>
+    </UserContextProvider>
+    
   
    
   )
