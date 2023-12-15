@@ -22,8 +22,12 @@ function SendCode(saveCurrentUser) {
        email:yup.string().required("user name is requied").email(),
        password:yup.string().required("password is requied").min(3,"must be at least 3 char").max(30,"must be at least 30 char"),
     })
-    const SendCodeSchema = yup.object({
+    const loginSchema = yup.object({
         email:yup.string().required("user name is requied").email(),
+        password:yup.string().required("password is requied").min(3,"must be at least 3 char").max(30,"must be at least 30 char"),
+     })
+    const SendCodeSchema = yup.object({
+        email:yup.string().required("user name is requied").length(4,"must 4 char"),
         
      })
     }
@@ -96,7 +100,7 @@ function SendCode(saveCurrentUser) {
         {renderInputs}
 
 <button type='submit' disabled={!formik.isValid}> Login </button>
-        
+        <Link to='/SendCode'>Reset Password</Link>
     </from>
    </div>
    </>
