@@ -4,6 +4,9 @@ import style from './ProfileModels.css'
 
 function Profile() {
     const {userData}=useContext(UserContext);
+    if(loading){
+        return <p>..loading</p>
+    }
     console.log(userData);
 
   return (

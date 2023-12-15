@@ -13,6 +13,8 @@ import { jwtDecode } from 'jwt-decode';
 import { useEffect } from 'react';
 import { CartContextProvider } from './component/web/content/cart.jsx';
 import UserContextProvider from './component/web/content/User.jsx';
+import ProtectedRoute from './protectedRoute/ProtectedRoute.jsx';
+import Profile from './component/profile/Profile.jsx';
 
 function App() {
   const [user,setUser] = useState(null); //if null is user nonenter
@@ -44,10 +46,17 @@ const router = createBrowserRouter([ //object each element in object
         element:<Login saveCurrentUser={saveCurrentUser}/>
       },
     
-      {
+      { 
         index:true,
-        //path:'home', or /
+         /*path:'home', or / */
         element:<Home/>
+      },
+      {
+        path:'profile',
+        element:
+        <ProtectedRoute>
+          <Profile/>
+        </ProtectedRoute>    // if put info and contant in folder profile so put children info & contant 
       },
       {
         path:'categories',
