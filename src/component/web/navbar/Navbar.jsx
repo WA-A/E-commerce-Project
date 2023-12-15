@@ -28,22 +28,25 @@ function Navbar() {
             <a className="nav-link" href="#">Categories</a>
           </li>
 
-          <li className="nav-item">
-            <a className="nav-link" href="#">cart</a>
-          </li>
+          
 
 
           <li className="nav-item">
           <a className="nav-link" href="#">Products</a>
         </li>
        
-       
-       
+       {userToken?(
+         <li className="nav-item">
+         <Link className="nav-link" to="/cart">Cart</Link>
+       </li>
+       ):null
+       }
         </ul>
+
         <ul className="navbar-nav">
         <li className="nav-item dropdown">
         <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Dropdown
+          {userData!=null?userData.userName:'Account'}
         </a>
         <ul className="dropdown-menu ">
           {userToken == null?(

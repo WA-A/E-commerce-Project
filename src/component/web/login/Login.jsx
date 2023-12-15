@@ -56,7 +56,7 @@ function Login(saveCurrentUser) {
    if(data.message=='success'){
     localStorage.setItem("userToken",data.token); // token in network
     setuserToken(data.token);       //saveCurrentUser();
-    toast.success(' login Success',{
+    toast.success('login Success',{
         position: "bottom-center",
          autoClose: false,
         hideProgressBar: false,
