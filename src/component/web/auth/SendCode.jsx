@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../content/User.jsx';
 
-function SendCode(saveCurrentUser) {
+function SendCode(saveCurrentUser) { // Same Login
    const navigate = useNavigate();
    const formik = useFormik({
     initialValues:{
