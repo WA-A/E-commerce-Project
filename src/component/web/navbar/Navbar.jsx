@@ -1,9 +1,12 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../content/User.jsx';
+import { CartContext } from '../content/cart.jsx';
 function Navbar() {
   let {userToken,setUserToken}=useContext(UserContext);
-  const navigate = useNavigate();
+  const {count}=useContext(CartContext);
+  console.log(count);
+  let navigate = useNavigate();
   const logout = ()=>{
     localStorage.removeItem("userToken");
     setUserToken(null);
@@ -37,7 +40,7 @@ function Navbar() {
        
        {userToken?(
          <li className="nav-item">
-         <Link className="nav-link" to="/cart">Cart</Link>
+         <Link className="nav-link" to="/cart">Cart {count}</Link>
        </li>
        ):null
        }

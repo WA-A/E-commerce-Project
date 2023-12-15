@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {createBrowserRouter,RouterProvider,} from "react-router-dom";
 import WebLayout from './component/Layout/WebLayout.jsx';
 import Home from './component/web/home/Home';
@@ -11,27 +11,28 @@ import Login from './component/web/login/Login.jsx';
 import CategoriesDetails from './component/product/Proudct.jsx';
 import { jwtDecode } from 'jwt-decode';
 import { useEffect } from 'react';
-import { CartContextProvider } from './component/web/content/cart.jsx';
-import UserContextProvider from './component/web/content/User.jsx';
+import { CartContext, CartContextProvider } from './component/web/content/cart.jsx';
+import UserContextProvider, { UserContext } from './component/web/content/User.jsx';
 import ProtectedRoute from './protectedRoute/ProtectedRoute.jsx';
 import Profile from './component/profile/Profile.jsx';
 import SendCode from './component/web/auth/SendCode.jsx';
 
 function App() {
-  const [user,setUser] = useState(null); //if null is user nonenter
-  const saveCurrentUser = ()=>{
-  const token = localStorage.getItem("userToken");
-  const decoded = jwtDecoded(token);
+  //const [user,setUser] = useState(null); //if null is user nonenter
+  let {setUserToken}=useContext(UserContext);
+  let {setCount,getCartContext}=useContext(CartContext);
+  useEffect( ()=>{
+    if(localStorage.getItem("userToken")!=null){
+  setUserToken(localStorage.getItem("userToken"));
+  setCount(getCartContext().count);
+    }
+  },[])
+ const decoded = jwtDecoded(token);
   //console.log(decoded);
   setUser(decoded);
-}
 
-useEffect( ()=>{
-  if(localStorage.getItem("userToken")){
-saveCurrentUser();
-  }
-},[]
-)
+
+
 
 const router = createBrowserRouter([ //object each element in object
   {
@@ -108,6 +109,6 @@ const router = createBrowserRouter([ //object each element in object
   
    
   )
-}
 
+}
 export default App
