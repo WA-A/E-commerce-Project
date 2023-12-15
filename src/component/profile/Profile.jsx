@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../web/content/User'
-import style from './ProfileModels.css'
+import style from './ProfileModels.css' 
 
 function Profile() {
     const {userData}=useContext(UserContext);
