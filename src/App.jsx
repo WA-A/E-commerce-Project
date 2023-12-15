@@ -15,6 +15,7 @@ import { CartContextProvider } from './component/web/content/cart.jsx';
 import UserContextProvider from './component/web/content/User.jsx';
 import ProtectedRoute from './protectedRoute/ProtectedRoute.jsx';
 import Profile from './component/profile/Profile.jsx';
+import SendCode from './component/web/auth/SendCode.jsx';
 
 function App() {
   const [user,setUser] = useState(null); //if null is user nonenter
@@ -44,6 +45,10 @@ const router = createBrowserRouter([ //object each element in object
       {
         path:'login',
         element:<Login saveCurrentUser={saveCurrentUser}/>
+      },
+      {
+        path:'send',
+        element:<SendCode/>
       },
     
       { 
