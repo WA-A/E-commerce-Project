@@ -4,10 +4,12 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { CartContext } from '../web/content/cart';
 
+//export const CartContext=createContext(null);
 
 function Proudct() {
   const {ProudctId}=useParams();
   const {addToCartContext} = useContext(CartContext);
+  let [quantity,setQuantity] = useState(0);
   const getproduct = async ()=>{
     
    const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/Proudct/${categoryId}`);
@@ -20,6 +22,37 @@ function Proudct() {
     const res = await addToCartContext(ProudctId);
     console .log(res);
   }
+
+  const incraseQuantity= async (ProudctId)=>{
+    try{
+        const token = localStorage.geItem("userToken");
+        const {data}=await axios.patch(`${import.meta.env.VITE_API_URL}/cart/incraseQuantity`, {ProudctId}
+    ,{
+        headers:{Authorization:`Wasan_${token}`}
+        })
+        setQuantity(++quantity);
+        return data;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+const decraseQuantity= async (ProudctId)=>{
+  try{
+      const token = localStorage.geItem("userToken");
+      const {data}=await axios.patch(`${import.meta.env.VITE_API_URL}/cart/decraseQuantity`, {ProudctId}
+  ,{
+      headers:{Authorization:`Wasan_${token}`}
+      })
+      setQuantity(--quantity);
+      return data;
+  }
+  catch(error){
+      console.log(error);
+  }
+}
+
 
 if(isLoading){
   return <h2>loading...</h2>
