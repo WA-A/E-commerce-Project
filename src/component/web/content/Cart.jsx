@@ -33,14 +33,29 @@ export function CartContextProvider({children}){
         console.log(error);
     }
  }
- const removeItemContext=async (ProudctId)=>{
+ const removeItemContext= async (ProudctId)=>{
     try{
-        const token = localStorage.geItem("usee token");
+        const token = localStorage.geItem("userToken");
         const {data}=await axios.patch(`${import.meta.env.VITE_API_URL}/cart/removeItem`, {ProudctId}
     ,{
         headers:{Authorization:`Wasan_${token}`}
         })
         setCount(++count);
+        return data;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+const ClearCart= async (ProudctId)=>{
+    try{
+        const token = localStorage.geItem("userToken");
+        const {data}=await axios.patch(`${import.meta.env.VITE_API_URL}/cart/clear`, {ProudctId}
+    ,{
+        headers:{Authorization:`Wasan_${token}`}
+        })
+        setCount([]);  // count = 0
         return data;
     }
     catch(error){
