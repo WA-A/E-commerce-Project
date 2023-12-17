@@ -4,8 +4,6 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { CartContext } from '../web/content/cart';
 
-//export const CartContext=createContext(null);
-
 function Proudct() {
   const {ProudctId}=useParams();
   const {addToCartContext} = useContext(CartContext);
