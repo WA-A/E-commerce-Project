@@ -12,6 +12,7 @@ function Order() {
 
     const {data,isLoading}= useQuery("Order",getOrder);
    console.log(data);
+   
    if(isLoading){
     return <h2>loading...</h2>
   }
