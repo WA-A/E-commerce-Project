@@ -16,6 +16,8 @@ import UserContextProvider, { UserContext } from './component/web/content/User.j
 import ProtectedRoute from './protectedRoute/ProtectedRoute.jsx';
 import Profile from './component/profile/Profile.jsx';
 import SendCode from './component/web/auth/SendCode.jsx';
+import { OrderContextProvider } from './component/web/content/Order.jsx';
+import Order from './component/web/cart/Order';
 
 function App() {
   //const [user,setUser] = useState(null); //if null is user nonenter
@@ -27,9 +29,9 @@ function App() {
   setCount(getCartContext().count);
     }
   },[])
- const decoded = jwtDecoded(token);
+ //const decoded = jwtDecoded(token);
   //console.log(decoded);
-  setUser(decoded);
+  //setUser(decoded);
 
 
 
@@ -102,7 +104,9 @@ const router = createBrowserRouter([ //object each element in object
   return (
     <UserContextProvider>
       <CartContextProvider> 
+      <OrderContext.Provider>
       <RouterProvider router={router} />
+      </OrderContext.Provider>
     </CartContextProvider>
     </UserContextProvider>
     
