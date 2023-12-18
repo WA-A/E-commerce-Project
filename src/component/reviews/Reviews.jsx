@@ -1,12 +1,26 @@
 import React from 'react'
 
 function Reviews() {
-    // Creat Reviews
+    // Create Reviews
     const addReviews = async (ProudctId)=>{
         try{
             const token = localStorage.getItem("userToken");
             const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/products/${ProudctId}/review`, 
             {headers:{Authorization:`Wasan_${token}`}});
+            return data;
+       
+        }
+        catch(error){
+            console.log(error);
+        }
+     }
+     // Get Reviews
+     const getCartContext = async (ProudctId)=>{
+        try{
+            const token = localStorage.getItem("userToken");
+            const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products/${ProudctId}/review`, 
+            {headers:{Authorization:`Wasan_${token}`}});
+            setCount(data.count);
             return data;
        
         }
