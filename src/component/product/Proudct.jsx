@@ -8,9 +8,9 @@ function Proudct() {
   const {ProudctId}=useParams();
   const {addToCartContext} = useContext(CartContext);
   let [quantity,setQuantity] = useState(0);
+
   const getproduct = async ()=>{
-    
-   const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/Proudct/${categoryId}`);
+   const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/Proudcts/${categoryId}`);
    return data.Proudct;
  
   }
@@ -51,6 +51,11 @@ const decraseQuantity= async (ProudctId)=>{
   }
 }
 
+const getproductwithid = async ()=>{
+  const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/Proudcts/${ProudctId}`);
+  return data.Proudct;
+
+ }
 
 if(isLoading){
   return <h2>loading...</h2>
